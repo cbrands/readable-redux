@@ -20,5 +20,6 @@ const headers = {
 export const getCategories = () => {
     return fetch(`${BACKEND_URL}/categories`, { headers })
         .then(response => response.json())
-        .then(data => data.categories)
+        //.then(data => data.categories)
 }
+

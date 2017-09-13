@@ -1,31 +1,23 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {loadCategories} from '../actions'
+import {requestCategories} from '../actions'
 import { connect } from 'react-redux'
-import { getCategories } from '../utils/backendAPI';
 
 class Aside extends Component {
     componentDidMount() {
-        getCategories().then(categories => dispatch(loadCategories(categories)))
+        console.log('myprops', this.props);
+        this.props.requestCategories();
     }
 
-    // export const fetchCategories = () => dispatch => (
-    //     getAllCategories()
-    //         .then(categories => dispatch(loadCategories(categories)))
-    // )
-
     render() {
-        console.log('this.props', this.props)
-        var myCategories;
-        if (this.state && this.state.categories) {
-            myCategories = this.state.categories;
-        }
+        let myCategories = this.props.categories.categories;
+        console.log('mycategories', myCategories);
         return (
             <aside className="col-md-4 col-xs-12">
                 <h2>Categories</h2>
                 <ul>
                     {myCategories && myCategories.map((category) => (
-                        <li key={category}>{category}</li>
+                        <li key={category.name}>{category.name}</li>
                     ))}
                 </ul>
             </aside>
@@ -35,17 +27,17 @@ class Aside extends Component {
 
 
 
-function mapStateToProps ({ state }) {
-    //console.log(categories)
-  return {
-    categories: state.categories
-  };
+function mapStateToProps ({ categories }) {
+    return {
+        categories
+    }
 }
 
-//const mapDispatchToProps = (dispatch) => {
-//  return {
-//    getCategories: (data) => dispatch(loadCategories(data))
-//  }
-//}
+function mapDispatchToProps (dispatch) {
+    return {
+        requestCategories: (data) => dispatch(requestCategories(data))
+    }
+}
 
-export default connect(mapStateToProps, null)(Aside)
+//export default Aside
+export default connect(mapStateToProps, mapDispatchToProps)(Aside)
