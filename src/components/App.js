@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import Aside from './Aside';
+import { Route } from 'react-router-dom'
+import MainPage from './MainPage';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <h1>Readable</h1>
-                <Aside />
+                <div className="Container">
+                    <Route exact path ='/' component={MainPage} />
+                    <Route exact path ='/:category' component={MainPage} />
+                </div>
             </div>
         )
     }
