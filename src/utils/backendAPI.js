@@ -7,7 +7,7 @@ if (!token) {
     var tokenLength = 24;
     var randomArray = [];
     for (var i = 0; i < tokenLength; i++) {
-        randomArray.push(Math.floor(Math.random() * tokenLength));
+        randomArray.push(characterSet.charAt(Math.floor(Math.random() * characterSet.length)));
     }
     token = localStorage.token = randomArray.join('');
 }
@@ -18,8 +18,20 @@ const headers = {
 }
 
 export const getCategories = () => {
+    console.log('meh', fetch(`${BACKEND_URL}/categories`, { headers })
+        .then(response => response.json()));
     return fetch(`${BACKEND_URL}/categories`, { headers })
         .then(response => response.json())
-        //.then(data => data.categories)
 }
 
+export const getPosts = () => {
+    console.log('meh', fetch(`${BACKEND_URL}/posts`, { headers })
+        .then(response => response.json()));
+    return fetch(`${BACKEND_URL}/posts`, { headers })
+        .then(response => response.json())
+}
+
+
+export const getComments = (id) =>
+    fetch(`${BACKEND_URL}/posts/${id}/comments`, { headers })
+        .then(response => response.json())

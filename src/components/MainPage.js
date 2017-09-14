@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Aside from './Aside';
+import PostSection from './PostSection';
 
 class MainPage extends Component {
     render() {
@@ -7,6 +8,7 @@ class MainPage extends Component {
             <div className="App">
                 <h1>Readable</h1>
                 <Aside />
+                <PostSection />
             </div>
         )
     }
